@@ -30,10 +30,17 @@ source /etc/bash_completion.d/wo_auto.rc
 echo "=============================="
 echo "Install Nginx, php7.3 and configure WO backend"
 echo "=============================="
-sudo wo stack install
+sudo wo stack install --php73 --mysql || exit 1
 sudo yes | sudo wo site create 0.test --php73 --mysql
 sudo echo -e "[user]\n\tname = WordOps\n\temail = test@test.test" > ~/.gitconfig
 sudo yes | sudo wo site delete 0.test
+
+echo "=============================="
+echo "Install Composer"
+echo "=============================="
+cd ~/
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/bin/composer
 
 echo "=============================="
 echo "Allow shell for www-data for SFTP usage"
@@ -46,7 +53,11 @@ echo "=============================="
 if [ $(gem -v|grep '^2.') ]; then
 	echo "gem installed"
 else
-	sudo apt-get install ruby2.5 -y
+	sudo apt-get install -y ruby-dev
+	echo "ruby-dev installed"
+	echo "gem not installed"
+	sudo gem install rubygems-update
+	sudo update_rubygems
 fi
 wordmove_install="$(gem list wordmove -i)"
 if [ "$wordmove_install" = true ]; then
@@ -66,11 +77,6 @@ else
 fi
 
 echo "=============================="
-echo "nanorc - Improved Nano Syntax Highlighting Files"
-echo "=============================="
-wget https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh -O- | sh
-
-echo "=============================="
 echo "wp cli - ianstall and add bash-completion for user www-data"
 echo "=============================="
 # automatically generate the security keys
@@ -85,6 +91,7 @@ sudo wget -O /var/www/.bashrc https://raw.githubusercontent.com/VirtuBox/ubuntu-
 
 # set owner
 sudo chown www-data:www-data /var/www/.profile
+sudo chown www-data:www-data /var/www/.bashrc
 
 echo "=============================="
 echo "Downloading: search-replace-database installer - srdb.sh"
@@ -99,8 +106,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 sudo apt-get -y autoremove && sudo apt-get clean
 export DEBIAN_FRONTEND=newt
-#sudo dd if=/dev/zero of=/EMPTY bs=1M
-#sudo rm -f /EMPTY
-#sudo cat /dev/null > ~/.bash_history && history -c && exit
-#sudo shutdown -h now
-
+sudo dd if=/dev/zero of=/EMPTY bs=1M
+sudo rm -f /EMPTY
+sudo cat /dev/null > ~/.bash_history && history -c
