@@ -30,7 +30,7 @@ source /etc/bash_completion.d/wo_auto.rc
 echo "=============================="
 echo "Install Nginx, php7.3 and configure WO backend"
 echo "=============================="
-sudo wo stack install --php73 --mysql || exit 1
+sudo wo stack install --mysql --php73 || exit 1
 sudo yes | sudo wo site create 0.test --php73 --mysql
 sudo echo -e "[user]\n\tname = WordOps\n\temail = test@test.test" > ~/.gitconfig
 sudo yes | sudo wo site delete 0.test
