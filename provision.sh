@@ -25,7 +25,6 @@ echo "Install WordOps"
 echo "=============================="
 sudo wget -qO wo wops.cc
 sudo bash wo || exit 1
-source /etc/bash_completion.d/wo_auto.rc
 
 echo "=============================="
 echo "Install Nginx, php7.3 and configure WO backend"
@@ -63,6 +62,9 @@ sudo wget -O /var/www/.bashrc https://raw.githubusercontent.com/VirtuBox/ubuntu-
 # set owner
 sudo chown www-data:www-data /var/www/.profile
 sudo chown www-data:www-data /var/www/.bashrc
+
+# copy .bash_profile to root
+sudo cp /home/vagrant/.bash_profile /root
 
 echo "=============================="
 echo "Downloading: search-replace-database installer - srdb.sh"
