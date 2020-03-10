@@ -63,8 +63,9 @@ sudo wget -O /var/www/.bashrc https://raw.githubusercontent.com/VirtuBox/ubuntu-
 sudo chown www-data:www-data /var/www/.profile
 sudo chown www-data:www-data /var/www/.bashrc
 
-# copy .bash_profile to root
-sudo cp /home/vagrant/.bash_profile /root
+# copy .profile/.bashrc to root
+sudo cp /home/vagrant/.profile /root
+sudo cp /home/vagrant/.bashrc /root
 
 echo "=============================="
 echo "Downloading: yq is a lightweight and flexible command-line YAML processor"
