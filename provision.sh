@@ -67,6 +67,13 @@ sudo chown www-data:www-data /var/www/.bashrc
 sudo cp /home/vagrant/.bash_profile /root
 
 echo "=============================="
+echo "Downloading: yq is a lightweight and flexible command-line YAML processor"
+echo "=============================="
+sudo add-apt-repository ppa:rmescandon/yq
+sudo apt update
+sudo apt install yq -y
+
+echo "=============================="
 echo "Downloading: search-replace-database installer - srdb.sh"
 echo "=============================="
 cd /usr/local/bin && sudo wget https://gist.githubusercontent.com/DimaMinka/24c3df57a78dd841a534666a233492a9/raw/d5ca7209164c7a22879fc7863f1bac1f0145ba84/srdb.sh
