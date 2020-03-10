@@ -63,6 +63,9 @@ sudo wget -O /var/www/.bashrc https://raw.githubusercontent.com/VirtuBox/ubuntu-
 sudo chown www-data:www-data /var/www/.profile
 sudo chown www-data:www-data /var/www/.bashrc
 
+# add wo for non-root users 
+echo -e "alias wo='sudo -E wo'" >> /home/vagrant/.bashrc
+echo -e "source /etc/bash_completion.d/wo_auto.rc" >> /home/vagrant/.bashrc
 # copy .profile/.bashrc to root
 sudo cp /home/vagrant/.profile /root
 sudo cp /home/vagrant/.bashrc /root
